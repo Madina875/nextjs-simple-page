@@ -6,12 +6,20 @@ const User = async () => {
   const data = await response.json();
 
   return (
-    <div className=" bg-gray-300 min-h-screen">
-      <div className="container grid grid-cols-4 gap-10 py-20">
-        {data?.map((e: any, inx: any) => (
-          <div className=" flex flex-col justify-between " key={inx}>
-            <strong className="italic text-[20px]">{e.username}</strong>
-            <p className="line-clamp-2">{e.email}</p>
+    <div className="bg-gray-100 min-h-screen">
+      <h2 className="m-auto border text-center size-full italic my-2 font-[Tangerine]">
+        Choose a user and you can see info about them
+      </h2>
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-16">
+        {data?.map((e: any, inx: number) => (
+          <div
+            key={inx}
+            className="group rounded-r-2xl border-l-1 bg-white p-6 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 flex flex-col items-center text-center"
+          >
+            <strong className="uppercase text-lg font-semibold text-gray-800">
+              {e.username}
+            </strong>
+            <p className="text-sm text-gray-500 mt-1">{e.email}</p>
           </div>
         ))}
       </div>

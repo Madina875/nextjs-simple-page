@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google"; //fonts
+import { Geist, Geist_Mono, Volkhov, Tangerine } from "next/font/google"; //fonts
 import "./globals.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
