@@ -1,9 +1,14 @@
-import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 
-const User = async () => {
-  const response = await fetch("https://fakestoreapi.com/users");
-  const data = await response.json();
+async function getUsers() {
+  const res = await fetch("https://fakestoreapi.com/users", {
+    next: { revalidate: 60 },
+  });
+  return res.json();
+}
+
+export default async function UserPage() {
+  const data = await getUsers();
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -11,20 +16,19 @@ const User = async () => {
         Choose a user and you can see info about them
       </h2>
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-16">
-        {data?.map((e: any, inx: number) => (
-          <div
-            key={inx}
-            className="group rounded-r-2xl border-l-1 bg-white p-6 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 flex flex-col items-center text-center"
+        {data?.map((e: any) => (
+          <Link
+            href={`/user/${e.id}`}
+            key={e.id}
+            className="group rounded-r-2xl border-l-1 bg-white p-6 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 flex flex-col items-center text-center cursor-pointer"
           >
             <strong className="uppercase text-lg font-semibold text-gray-800">
               {e.username}
             </strong>
             <p className="text-sm text-gray-500 mt-1">{e.email}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
   );
-};
-
-export default User;
+}

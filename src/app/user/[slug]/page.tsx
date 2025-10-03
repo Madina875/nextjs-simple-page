@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
+import React, { use } from "react";
 
-const UserDetail = () => {
+const UserDetail = ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = use(params);
   return <div>UserDetail</div>;
 };
 
